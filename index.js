@@ -50,43 +50,26 @@
 //
 //console.log(oauth.toHeader(oauth.authorize(request_data, token)).Authorization);
 //
-
-
-var OAuth = require('oauth-1.0a');
-
-var oauth = OAuth({
-    consumer: {
-        'public': 'e9i5XWtMDVR21NMuv0lMgDZpy',
-        'secret': 'PQitQYHLXAChEd5StKCqVCUdS5aSnvYdlgGz9pSCU9942OJcqu'
+var adapter = require('./twitter')({
+    oauth: {
+        consumer: {
+            'public': 'e9i5XWtMDVR21NMuv0lMgDZpy',
+            'secret': 'PQitQYHLXAChEd5StKCqVCUdS5aSnvYdlgGz9pSCU9942OJcqu'
+        },
+        signature_method: 'HMAC-SHA1'
     },
-    signature_method: 'HMAC-SHA1'
+    token: {
+        'public': '1590979938-BDvHlgGJwBRZNi0038KGnUIzBB5jNuuC3zpCOVm',
+        'secret': 'k606voP0YMP6xdggwe1iqyfmVo6TaUpLZpSaBcf2qDzPO'
+    },
+    status: 'Test',
+    apiVersion: '1.1'
 });
 
+adapter.post(__dirname + '/ngoctrinh.jpg').then(function (response) {
+    console.log(response);
+}, function (e) {
+    console.log(e);
+});
 
-var TwitterRequesetFactory = require('./twitter/twitter-auth-request-factory');
-var factory = new TwitterRequesetFactory(require('request'), oauth);
-var fs = require('fs');
-
-factory.setToken(
-    '1590979938-BDvHlgGJwBRZNi0038KGnUIzBB5jNuuC3zpCOVm',
-    'k606voP0YMP6xdggwe1iqyfmVo6TaUpLZpSaBcf2qDzPO'
-);
-
-factory.make({
-    url: 'https://upload.twitter.com/1.1/media/upload.json',
-    method: 'POST',
-    formData: {media: fs.createReadStream(__dirname + '/ngoctrinh.jpg')}
-}).then(function (json) {
-    return json['media_id_string'];
-}).then(function (mediaId) {
-    return factory.make({
-        method  : 'POST',
-        url     : 'https://api.twitter.com/1.1/statuses/update.json?' +
-                    'status=So Cute&' +
-                    'media_ids=' + mediaId
-    });
-}).then(function (json) {
-    console.log(json);
-})
-;
 

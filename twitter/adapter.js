@@ -1,85 +1,36 @@
-var Promise      = require('bluebird');
-var OAuth        = require('oauth-1.0a');
-var fs           = require('fs');
-var TwitterError = require('./error');
+var fs = require('fs');
 
-var TwitterAdapter = function (request, oauth) {
-    this.request = request;
-    this.oauth   = oauth;
+var TwitterAdapter = function (factory) {
+    this.factory = factory;
 
     this.setApiVersion = function (apiVersion) {
         this.apiVersion = apiVersion;
     };
-    this.setToken = function (publicToken, secretToken) {
-        this.token = {
-            'public': publicToken,
-            'secret': secretToken
-        }
-    };
+
     this.setStatus = function (status) {
         this.status = status;
     };
+    this.post = function (image) {
+        var status  = this.status;
+        var factory = this.factory;
+        var rootUrl = 'https://api.twitter.com/' + this.apiVersion;
 
-    this.post = function (imageUrl) {
-
-        var apiVersion = this.apiVersion;
-        var token      = this.token;
-        var status     = this.status;
-
-        var request_data = {
-            url: 'https://api.twitter.com/1.1/statuses/update.json',
+        return factory.make({
+            url: 'https://upload.twitter.com/' + this.apiVersion + '/media/upload.json',
             method: 'POST',
-            data: {
-                status: status
-            }
-        };
-
-        request
-            .post(
-                {
-                    url: 'https://upload.twitter.com/' + apiVersion + '/media/upload.json',
-                    headers: oauth.toHeader(oauth.authorize(request_data, token))
-                },
-                {
-                    formData: {media: fs.createReadStream(imageUrl)}
-                },
-                function (error, response, json) {
-                    if (error) {
-                        throw error;
-                    } else {
-                        var responseBody = JSON.parse(json);
-                        if (responseBody.error) {
-                            throw new TwitterError(responseBody.error);
-                        } else {
-                            resolve(responseBody);
-                        }
-                    }
-                }
-            );
-
-
-
-
-
-
-
-
-
-
-        console.log(oauth.toHeader(oauth.authorize(request_data, token)).Authorization);
-    };
-};
-
-
-
-
-TwitterAdapter.prototype.post = function (image) {
-    var request = this.request;
-
-    return new Promise(function () {
-        request.post('https://upload.twitter.com/1.1/media/upload.json');
-
-    })
+            formData: {media: fs.createReadStream(image)}
+        }).then(function (json) {
+            return json['media_id_string'];
+        }).then(function (mediaId) {
+            return factory.make({
+                method  : 'POST',
+                url     : rootUrl + '/statuses/update.json?' +
+                'status=' + status + '&' +
+                'media_ids=' + mediaId
+            });
+        })
+        ;
+    }
 };
 
 module.exports = TwitterAdapter;
