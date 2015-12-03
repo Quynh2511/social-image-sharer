@@ -10,6 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.0.6",
+    "body-parser": "^1.14.1",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "googleapis": "^2.1.6",
     "oauth-1.0a": "^1.0.1",
     "request": "^2.67.0"
   }
