@@ -6,8 +6,8 @@ var app = express();
 var router = express.Router();
 
 var oauth2Client = new OAuth2(
-    '939505443485-kqhpl3ddq2pb2fu8dt8hfhp3opcju7ps.apps.googleusercontent.com',
-    'fNUcF4nxxGx_9xFrCM9fdiZJ',
+    '428085943910-0envpfa6jq8qjpavrto4sn2utgsjs9a4.apps.googleusercontent.com',
+    'FVTXp2MoA4HKD6oVykfuZdc7',
     'http://localhost:3000/oauth/callback'
 );
 
@@ -16,11 +16,13 @@ app.use(router);
 
 router.get('/', function (request, response) {
     var scopes = [
-        'https://www.googleapis.com/auth/plus.login',
+        //'https://www.googleapis.com/auth/plus.login',
         'https://www.googleapis.com/auth/plus.me',
-        'https://www.googleapis.com/auth/calendar',
-        'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/plus.profiles.read'
+        'https://www.googleapis.com/auth/plus.media.upload',
+        'https://www.googleapis.com/auth/plus.stream.write',
+        //'https://www.googleapis.com/auth/calendar',
+        //'https://www.googleapis.com/auth/userinfo.profile',
+        //'https://www.googleapis.com/auth/plus.profiles.read'
     ];
     var url = oauth2Client.generateAuthUrl({
         access_type: 'offline', // 'online' (default) or 'offline' (gets refresh_token)

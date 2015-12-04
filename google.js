@@ -1,13 +1,16 @@
-var google = require('googleapis');
-var urlshortener = google.urlshortener('v1');
+var GGAdapter = require('./google/adapter');
+var Factory   = require('./google/google-auth-request-factory');
+var request = require('request');
 
-var params = { shortUrl: 'http://goo.gl/xKbRu3' };
+var factory = new Factory(request);
+var adapter = new GGAdapter(factory);
 
-// get the long url of a shortened url
-urlshortener.url.get(params, function (err, response) {
-    if (err) {
-        console.log('Encountered error', err);
-    } else {
-        console.log('Long url is', response.longUrl);
-    }
+adapter.setToken('ya29.QAKeKsvK8D_EqvtaDhohxy3UyFazAp37j8V8ypK8IVgdDCVeAoJ7l8sDMS2Cj8uT3Zby');
+adapter.setApiVersion('v1');
+
+
+adapter.post(__dirname + '/ngoctrinh.jpg').then(function (response) {
+    console.log(response);
+}, function (e) {
+    console.log(e);
 });
