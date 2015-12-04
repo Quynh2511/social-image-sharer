@@ -1,0 +1,33 @@
+var underscore = require('underscore');
+
+var Renderer = function (phantomPageResolver, filenameGenerator) {
+    this.phantomPageResolver = phantomPageResolver;
+    this.filenameGenerator   = filenameGenerator;
+};
+
+Renderer.prototype.setFormat = function (format) {
+    this.format = format;
+    return this;
+};
+
+Renderer.prototype.setQuality = function (quality) {
+    this.quality = quality;
+    return this;
+};
+
+Renderer.prototype.render = function (templateString, data) {
+    var content = underscore.template(templateString)(data);
+    var format  = this.format;
+    var quality = this.quality;
+    var fileName = this.filenameGenerator.generate(format);
+
+    return this.phantomPageResolver.resolve().then(function (page) {
+        page.setContent(content);
+        page.render(fileName.physical, {format: format, quality: quality});
+        page.exit();
+        return fileName;
+    });
+};
+
+
+module.exports = Renderer;
