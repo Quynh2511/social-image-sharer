@@ -1,5 +1,5 @@
-var GGAdapter = require('./google/adapter');
-var Factory   = require('./google/google-auth-request-factory');
+var GGAdapter = require('./lib/sharer/google/adapter');
+var Factory   = require('./lib/sharer/google/google-auth-request-factory');
 var request = require('request');
 
 var factory = new Factory(request);
