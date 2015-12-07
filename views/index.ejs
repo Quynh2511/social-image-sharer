@@ -5,15 +5,15 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <style type="text/css">
         body { background: white }
-        * { font-family: 'Open Sans', sans-serif }
-        #itemImage {
-            width: 100%; height: 400px;
-            background-size: cover;
-        }
+        * { font-family: 'Open Sans', sans-serif; margin: 0 auto}
+
     </style>
 </head>
 <body>
-<h1 style="text-align: center"><%= first_name%> <%= last_name%> wins</h1>
-    <div style="background: url(<%= image_item%>);" id="itemImage"></div>
+<div style="padding: 10px;">
+    <img src="http://media.tintuc.vn/uploads/medias/2015/05/31/550x500/ban-sao-ngoc-trinh-khoe-than-hinh-goi-cam-bb-baaabSpreV.jpg"
+         style="border-radius: 50%; width: 100%; position: relative; height: auto">
+    <h1 style="text-align: center"><%= first_name%> <%= last_name%></h1>
+</div>
 </body>
 </html>

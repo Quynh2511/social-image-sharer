@@ -34,7 +34,7 @@ app.get('/rendering', function (request, response) {
 
 app.post('/share', function (request, response) {
     renderer.render(
-        'fsdf', request.body)
+        'http://localhost:3000/rendering', request.body)
         .then(function (file) {
             return Promise.all([
                 fbSharer.post(file.physical),

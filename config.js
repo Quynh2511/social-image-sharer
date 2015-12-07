@@ -21,7 +21,7 @@ module.exports = {
         facebook: {
             appId: '1379747485658310',
             appSecret: 'c337805df3ff9299c5aa46aa42d3d2b3',
-            accessToken: 'CAATm337DLMYBAEEdBMouZB06AtKaXDaQuZCJVqtCijGadMhREbkGkk20dFhmp7MIV48ZCnL0YXywvBj312Nc0LQ9IQlRZC4qVrgOA0yXB3z4DFpdZC0DyRuRnHWgvMxsnMiuLT2N0TjbegyxN9kp8WcZA5CryCtCgoG7OLOKNemXOeGaacAB8KaCCkafwDGGkZAO9nuiHukkMqm1QhCATEk',
+            accessToken: 'CAATm337DLMYBAE9Bc7xuMnfIS1ozRIVKYGPnmIdYnQpTzq7t4T8ZAvmR6GmXIAZByTEqI8didsyK5WUmqCvZALspfwV0r3IoJJpuZC716aP7pjRqtkosJ618H1U0xefBKMoEOq2RkZBZBUnqPAq6i11QWIA8wBHdwZAd35dfujmqdlNN2Ma2M71LyrkK3IMlNZCQe2IqAYDmmmcfBBycwnv0',
             apiVersion: 2.5
         },
         google: {
@@ -39,7 +39,7 @@ module.exports = {
                 'public': '1590979938-BDvHlgGJwBRZNi0038KGnUIzBB5jNuuC3zpCOVm',
                 'secret': 'k606voP0YMP6xdggwe1iqyfmVo6TaUpLZpSaBcf2qDzPO'
             },
-            status: 'Test',
+            status: null,
             apiVersion: '1.1'
         }
     }
