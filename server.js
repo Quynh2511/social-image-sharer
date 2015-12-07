@@ -1,3 +1,5 @@
+require('dotenv').load();
+
 var express         = require('express');
 var RendererFactory = require('./lib/renderer');
 var FacebookPostFactory
