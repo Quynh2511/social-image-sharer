@@ -33,8 +33,7 @@ app.get('/rendering', function (request, response) {
 });
 
 app.post('/share', function (request, response) {
-    renderer.render(
-        'http://localhost:3000/rendering', request.body)
+    renderer.render(config.templateUrl, request.body)
         .then(function (file) {
             return Promise.all([
                 fbSharer.post(file.physical),
@@ -51,4 +50,4 @@ app.post('/share', function (request, response) {
 
 });
 
-app.listen(3000);
+app.listen(config.server.port);
