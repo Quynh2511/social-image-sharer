@@ -1,6 +1,9 @@
 module.exports = {
 
-    templateUrl: process.env['TEMPLATE_URL'] || 'http://localhost:3000/rendering',
+    template : {
+        winner: process.env['TEMPLATE_WINNER_URL'] || 'http://localhost:3000/rendering/winner',
+        'new-bidder': process.env['TEMPLATE_NEW_BIDDER_URL'] || 'http://localhost:3000/rendering/new-bidder'
+    },
 
     phantom: {
         path: process.env['PHANTOM_PATH'] || (__dirname + '/node_modules/.bin/')

@@ -30,12 +30,16 @@ app.use(bodyParser.urlencoded({
 /**
  * API for rendering the image
  */
-app.get('/rendering', function (request, response) {
-    return response.render('index', request.query);
+app.get('/rendering/winner', function (request, response) {
+    return response.render('winner', request.query);
 });
 
-app.post('/share', function (request, response) {
-    renderer.render(config.templateUrl, request.body)
+app.get('/rendering/new-bidder', function (request, response) {
+    return response.render('new-bidder', request.query);
+});
+
+app.post('/share/winner', function (request, response) {
+    renderer.render(config.template.winner, request.body)
         .then(function (file) {
             return Promise.all([
                 fbSharer.post(file.physical),
@@ -46,10 +50,28 @@ app.post('/share', function (request, response) {
             response.json(apiResponses);
         })
         .catch(function (error) {
-            response.statusCode(500).json(error);
+            response.status(500).json(error);
         })
     ;
 
+});
+
+app.post('/share/new-bidder', function (request, response) {
+    console.log(request.body);
+    renderer.render(config.template['new-bidder'], request.body)
+        .then(function (file) {
+            return Promise.all([
+                fbSharer.post(file.physical),
+                twitterSharer.post(file.physical)
+            ]);
+        })
+        .then(function (apiResponses) {
+            response.json(apiResponses);
+        })
+        .catch(function (error) {
+            response.status(500).json(error);
+        })
+    ;
 });
 
 app.listen(config.server.port);
