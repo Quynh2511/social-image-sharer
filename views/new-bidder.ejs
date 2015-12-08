@@ -6,12 +6,13 @@
     <style type="text/css">
         body { background: white }
         * { font-family: 'Open Sans', sans-serif; margin: 0 auto}
+        #avatar {margin:auto; background-color: #eee;background-size: cover; width: 300px; height: 300px; border-radius: 50%}
     </style>
 </head>
 <body>
-<div>
-    <h1>New bidder template</h1>
-
+<div style="text-align: center; padding: 10px">
+    <div id="avatar" style="background-image: url(<%= avatar_url%>)"></div>
+    <h1><%= username%></h1>
 </div>
 </body>
 </html>
