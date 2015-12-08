@@ -39,7 +39,7 @@ module.exports = {
                 'public': process.env['SHARER_TWITTER_TOKEN_PUBLIC'] || '1590979938-BDvHlgGJwBRZNi0038KGnUIzBB5jNuuC3zpCOVm',
                 'secret': process.env['SHARER_TWITTER_TOKEN_SECRET'] || 'k606voP0YMP6xdggwe1iqyfmVo6TaUpLZpSaBcf2qDzPO'
             },
-            status: null,
+            status: '',
             apiVersion: process.env['SHARER_TWITTER_API_VERSION'] || 1.1
         }
     }

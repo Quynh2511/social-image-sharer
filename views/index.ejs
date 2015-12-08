@@ -6,14 +6,24 @@
     <style type="text/css">
         body { background: white }
         * { font-family: 'Open Sans', sans-serif; margin: 0 auto}
-
+        #avatar {border-radius: 50%; background-size: cover; width: 150px;height: 150px;}
     </style>
 </head>
 <body>
-<div style="padding: 10px;">
-    <img src="http://media.tintuc.vn/uploads/medias/2015/05/31/550x500/ban-sao-ngoc-trinh-khoe-than-hinh-goi-cam-bb-baaabSpreV.jpg"
-         style="border-radius: 50%; width: 100%; position: relative; height: auto">
-    <h1 style="text-align: center"><%= first_name%> <%= last_name%></h1>
+<div>
+    <div style="width: 60%;float: left; text-align: center">
+        <h1><%= item_name%></h1>
+        <img style="width: 100%; height: auto" src="<%= item_image%>" alt="<%item_name%>"/>
+    </div>
+    <div style="width: 40%;float: left;text-align: center">
+        <h1>Winner</h1>
+        <div id="avatar" style="background-image: url(<%= avatar_url%>)"></div>
+
+        <p style="text-align: center"><%= first_name%> <%= last_name%></p>
+        <div style="clear: both"></div>
+
+    </div>
+
 </div>
 </body>
 </html>

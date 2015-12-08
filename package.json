@@ -6,6 +6,8 @@
   "dependencies": {
     "bluebird": "^3.0.6",
     "body-parser": "^1.14.1",
+    "cache-manager": "^1.2.2",
+    "cache-manager-fs": "^1.0.3",
     "dotenv": "^1.2.0",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
